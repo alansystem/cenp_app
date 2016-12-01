@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="br.com.cenp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>CenpApp</name>
+    <name>CENP</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        CENP - Revista
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author href="http://clarearpropaganda.com.br" email="programador@clarearpropaganda.com.br">
+        Clarear Propaganda
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
