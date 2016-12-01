@@ -52,7 +52,7 @@
                         <span style="font-size:12px">
                             Para visualizar as revistas, é necessário um leitor de PDF devidamente instalado. Caso não tenha, 
 
-                            <a href="leitor_pdf.html">clique aqui.
+                            <a href="#" class="btnLeitorPDF">clique aqui.
                             
                                 <img src="img/pdf.png" border="0">
                             </a>
@@ -90,6 +90,10 @@
         $('.btnLogout').click(function(){
             sessionStorage.setItem('logado','false');
             location.href="login.html";
+        });
+
+        $('.btnLeitorPDF').click(function(){
+            location.href="leitor_pdf.html";
         });
 
         $( document ).on( "click", ".btnViewRevista", function() {
