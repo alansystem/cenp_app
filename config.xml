@@ -7,6 +7,11 @@
     <author href="http://clarearpropaganda.com.br" email="programador@clarearpropaganda.com.br">
         Clarear Propaganda
     </author>
+
+    <application android:debuggable="false">
+    <icon src="icon.png" />
+
+
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
