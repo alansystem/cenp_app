@@ -8,7 +8,6 @@
         Clarear Propaganda
     </author>
 
-    <application android:debuggable="false">
     <icon src="icon.png" />
 
 
