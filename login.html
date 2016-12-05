@@ -110,10 +110,10 @@
                     if(dados[0] == 'logado')
                     {
                         alert('logado');
-                        sessionStorage.setItem('id_cadastro',dados[1]);
-                        sessionStorage.setItem('nome',dados[2]);
-                        sessionStorage.setItem('email',dados[3]);
-                        sessionStorage.setItem('logado','true');
+                        localStorage.setItem('id_cadastro',dados[1]);
+                        localStorage.setItem('nome',dados[2]);
+                        localStorage.setItem('email',dados[3]);
+                        localStorage.setItem('logado','true');
 
                         location.href="home.html";
 
