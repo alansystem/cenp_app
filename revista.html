@@ -40,6 +40,10 @@
 
             <div class="container">
 
+            <div class="alert alert-success text-center continueLendo" style="display: none">
+              <strong>Continue a leitura:</strong> A página abaixo é de acordo com a última página visualizada desta edição.
+            </div>
+
                 <div class="row text-center">
                     <a href="home.html" class="btn btn-primary" style="color:#FFF">Revistas</a>
                     <a href="#" class="btn btn-primary previousPage" style="color:#FFF">Página Anterior</a>
@@ -71,6 +75,18 @@
             if(page_current == 1 || page_current == null)
             {
                 $('.previousPage').css('display','none');
+
+            }else{
+
+                $('.continueLendo').fadeIn('slow');
+
+                setTimeout(function(){ 
+                    
+                    $('.continueLendo').fadeOut('slow');
+
+                }, 7000); 
+
+                
             }
 
 
