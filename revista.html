@@ -37,20 +37,22 @@
 
 <body>
 
-                <div data-role="header" style="margin-bottom: 20px;height:50px">
-                       <a data-rel="back">Voltar</a>
-                </div>
-
 
             <div class="container">
+
+                <div class="row text-center">
+                    <a href="home.html" class="btn btn-primary" style="margin-right: 50px;color:#FFF">Revistas</a>
+                    <a href="#" class="btn btn-primary previousPage" style="color:#FFF">Página Anterior</a>
+                    <a href="#" class="btn btn-primary nextPage" style="color:#FFF">Próxima Página</a>
+                </div>
+
                 <div class="row text-center">
 
-                <div class="col-sm-12 col-xs-12">
-                    <img src="http://cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" class="img-responsive center-block">
+                    <div class="col-sm-12 col-xs-12" id="revistaPages">
+                    </div>
+ 
                 </div>
 
-                    
-                </div>
             
             </div><!-- Fim container -->
 
@@ -62,6 +64,114 @@
 
 
        $(function(){
+
+            var revista_id = localStorage.getItem('revista_id');
+            var page_current = localStorage.getItem('page_current_'+revista_id);
+
+            if(page_current == 1)
+            {
+                $('.previousPage').css('display','none');
+            }
+
+
+            $('.previousPage').click(function(){
+
+                $('.nextPage').css('display','inline');
+
+                var revistaPage = $(this).attr('id');
+                var link_app = localStorage.getItem('link_app');
+                var revista_id = localStorage.getItem('revista_id');
+
+                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))-1;
+
+                localStorage.setItem('page_current_'+revista_id,page_current);
+                
+                $('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
+
+                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                //Esconde o botão
+                if(localStorage.getItem('page_current_'+revista_id) == 1)
+                {
+                        $('.previousPage').css('display','none');
+                }
+
+            });
+
+            $('.nextPage').click(function(){
+
+                $('.previousPage').css('display','inline');
+
+                var revistaPage = $(this).attr('id');
+                var link_app = localStorage.getItem('link_app');
+                var revista_id = localStorage.getItem('revista_id');
+
+                var page_current = parseInt(localStorage.getItem('page_current_'+revista_id))+1;
+
+                localStorage.setItem('page_current_'+revista_id,page_current);
+                
+                $('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
+
+                $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
+                $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                //Esconde botão
+                if(localStorage.getItem('page_current_'+revista_id) == localStorage.getItem('total_pages'))
+                {
+                        $('.nextPage').css('display','none');
+                }
+            });
+
+            var id_revista = localStorage.getItem('revista_id');
+
+            $.ajax({
+              method: "POST",
+              data: {id_revista:id_revista},
+              async: false,
+              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiRevistaEspecifica",
+                crossDomain: true,
+                dataType: 'html',
+                 beforeSend: function() { $('#wait').show(); },
+                complete: function() { $('#wait').hide(); },
+                
+                statusCode: {
+                404: function() {
+                  console.log('Página fora do ar');
+                }
+                }
+                  
+                })
+                  .done(function(resultado) {
+                    var dados = resultado.split(';');
+
+                    localStorage.setItem('link_app',dados[0]);
+                    localStorage.setItem('total_pages',dados[1]);
+
+                    if(localStorage.getItem('page_current_'+id_revista) > 1){
+
+                        var page_current = localStorage.getItem('page_current_'+id_revista); 
+
+                        //$('#nextPage').attr('href',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
+                        $('.nextPage').attr('id',dados[0]+'/page'+(parseInt(page_current)+1)+'.jpg');
+
+                        $('#revistaPages').html('<img src="'+dados[0]+'/page'+page_current+'.jpg" class="img-responsive center-block">');
+
+                    }else{
+                        localStorage.setItem('page_current_'+id_revista,1);
+
+                        $('.nextPage').attr('id',dados[0]+'/page2.jpg');
+
+                        $('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="img-responsive center-block">');
+                    }
+                    
+                  })
+                  .fail(function() {
+                    alert( "error" );
+                  })
+                  .always(function() {
+                    //alert( "complete" );
+                  });
         
         });
     </script>
