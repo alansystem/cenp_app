@@ -31,6 +31,40 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 
     <title>CENP</title>
+
+
+    <style type="text/css">
+    /* styles unrelated to zoom */
+        * { border:0; margin:0; padding:0; }
+        p { position:absolute; top:3px; right:28px; color:#555; font:bold 13px/1 sans-serif;}
+
+        /* these styles are for the demo, but are not required for the plugin */
+        .zoom {
+            display:inline-block;
+            position: relative;
+        }
+        
+        /* magnifying glass icon */
+        .zoom:after {
+            content:'';
+            display:block; 
+            width:33px; 
+            height:33px; 
+            position:absolute; 
+            top:0;
+            right:0;
+            background:url(icon.png);
+        }
+
+        .zoom img {
+            display: block;
+        }
+
+        .zoom img::selection { background-color: transparent; }
+        
+        #ex2 img:hover { cursor: url(grab.cur), default; }
+        #ex2 img:active { cursor: url(grabbed.cur), default; }
+    </style>
 </head>
 
 <body data-transition="flip">
@@ -49,7 +83,9 @@
                 <div class="row text-center">
 
                 <div class="col-sm-12 col-xs-12">
-                    <img src="http://cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" data-zoom-image="http://cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" id="zoom_01" class="img-responsive center-block">
+                <span class='zoom' id='ex1'>
+                    <img src="http://cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" data-zoom-image="http://cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" class="img-responsive center-block">
+                </span>
                 </div>
 
                     
@@ -60,16 +96,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src='js/jquery.elevatezoom.js'></script>
+
+    <script src='js/jquery.zoom.js'></script>
 
     <script type="text/javascript">
 
-    $('#zoom_01').elevateZoom({
-        zoomType: "inner",
-        cursor: "crosshair",
-        zoomWindowFadeIn: 500,
-        zoomWindowFadeOut: 750
-    }); 
+    $('#ex1').zoom(); 
 
        $(function(){
 
