@@ -41,7 +41,7 @@
             <div class="container">
 
                 <div class="row text-center">
-                    <a href="home.html" class="btn btn-primary" style="margin-right: 50px;color:#FFF">Revistas</a>
+                    <a href="home.html" class="btn btn-primary" style="color:#FFF">Revistas</a>
                     <a href="#" class="btn btn-primary previousPage" style="color:#FFF">Página Anterior</a>
                     <a href="#" class="btn btn-primary nextPage" style="color:#FFF">Próxima Página</a>
                 </div>
@@ -68,7 +68,7 @@
             var revista_id = localStorage.getItem('revista_id');
             var page_current = localStorage.getItem('page_current_'+revista_id);
 
-            if(page_current == 1)
+            if(page_current == 1 || page_current == null)
             {
                 $('.previousPage').css('display','none');
             }
