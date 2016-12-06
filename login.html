@@ -63,6 +63,11 @@
                             </form>
                         </div>
                     </div>
+
+                                    <div class="row text-center" style="margin-top:50px">
+                                    <a href="cadastro.html" class="btn btn-success" style="color:#FFF;font-weight: normal;" data-transition="flip">Ainda não tem acesso? Cadastre-se aqui</a><br><br>
+                                    <a href="" class="btn btn-primary" style="color:#FFF;font-weight: normal;">Esqueceu e-mail / senha? Clique aqui</a>
+                                    </div>
             </div><!-- Fim container -->
 
 
@@ -78,6 +83,7 @@
 
     <script type="text/javascript">
        $(function(){
+
 
         $('.btnAcessar').click(function(){
 
@@ -102,14 +108,12 @@
                   
                 })
                   .done(function(resultado) {
-                    alert(resultado);
 
                     var dados = resultado.split(';');
 
                     //Caso sucesso no login
                     if(dados[0] == 'logado')
                     {
-                        alert('logado');
                         localStorage.setItem('id_cadastro',dados[1]);
                         localStorage.setItem('nome',dados[2]);
                         localStorage.setItem('email',dados[3]);
