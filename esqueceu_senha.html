@@ -51,23 +51,15 @@
                         <div class="col-xs-12">
                             <form>
                                   <div class="form-group">
-                                    <label for="email">Email:</label>
+                                    <label for="email">Informe seu Email:</label>
                                     <input type="email" class="form-control" id="email">
                                   </div>
-                                  <div class="form-group">
-                                    <label for="pwd">Senha:</label>
-                                    <input type="password" class="form-control" id="senha">
-                                  </div>
                                   <!--onclick="javascript:location.href='home.html'"-->
-                                  <a class="btn btn-default btnAcessar">Acessar</a>
+                                  <a class="btn btn-default btnEnviar">Enviar</a>
                             </form>
                         </div>
                     </div>
 
-                                    <div class="row text-center" style="margin-top:50px">
-                                    <a href="cadastro.html" class="btn btn-success" style="color:#FFF;font-weight: normal;" data-transition="flip">Ainda não tem acesso? Cadastre-se aqui</a><br><br>
-                                    <a href="esqueceu_senha.html" class="btn btn-primary" style="color:#FFF;font-weight: normal;">Esqueceu e-mail / senha? Clique aqui</a>
-                                    </div>
             </div><!-- Fim container -->
 
 
@@ -85,16 +77,15 @@
        $(function(){
 
 
-        $('.btnAcessar').click(function(){
+        $('.btnEnviar').click(function(){
 
             var email = $('#email').val();
-            var senha = $('#senha').val();
 
             $.ajax({
               method: "POST",
               async: false,
-              data: {email:email,senha:senha},
-              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiLogin",
+              data: {email:email},
+              url: "http://clarearpropaganda.com.br/teste/revista/revista/leitor/apiRecuperarSenha",
                 crossDomain: true,
                 dataType: 'html',
                  beforeSend: function() { $('#wait').show(); },
@@ -109,27 +100,18 @@
                 })
                   .done(function(resultado) {
 
-                    var dados = resultado.split(';');
-
-                    //Caso sucesso no login
-                    if(dados[0] == 'logado')
+                    if(resultado == 'vazio')
                     {
-                        localStorage.setItem('id_cadastro',dados[1]);
-                        localStorage.setItem('nome',dados[2]);
-                        localStorage.setItem('email',dados[3]);
-                        localStorage.setItem('logado','true');
+                        alert('Por favor informe seu email');
 
-                        location.href="home.html";
+                    }else if(resultado == 'senha-enviada'){
+                        alert('A senha foi enviada ao seu email!');
+                        location.href="login.html";
 
-                    }else if(dados[0] == 'falha-login')
+                    }else if(resultado == 'nao-encontrado')
                     {
-                        alert('Não foi encontrado seu cadastro, verifique se digitou corretamente!');
-
-                    }else if(dados[0] == 'nao-ativada')
-                    {
-                        alert('Sua conta não encontra-se ativada, acesse o email que enviamos e clique no link de ativação!');
+                        alert('Email não cadastrado, informe um email válido!');
                     }
-
 
                   })
                   .fail(function() {
