@@ -6,11 +6,12 @@
     <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport"  content="width=device-width, height=device-height, initial-scale=0.8, user-scalable=1" />
-   <!--<meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width,height=device-height, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+   <!--<meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=5, minimum-scale=1, width=device-width,height=device-height, target-densitydpi=device-dpi" />-->
 
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <link rel="stylesheet" href="css/bootstrap.css">-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnify.css">
 
     <title>CENP</title>
 
@@ -20,6 +21,8 @@
 
 
             <div class="container">
+
+            <img src="http://www.cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" class="zoom" width="80" data-magnify-src="http://www.cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg">
 
             <div class="alert alert-success text-center continueLendo" style="display: none">
               <strong>Continue a leitura:</strong> A página abaixo é de acordo com a última página visualizada desta edição.
@@ -48,8 +51,9 @@
     <script type="text/javascript">
 
 
+var $zoom;
        $(function(){
-
+       
             var revista_id = localStorage.getItem('revista_id');
             var page_current = localStorage.getItem('page_current_'+revista_id);
 
@@ -112,6 +116,7 @@
                 //$('#revistaPages').html('<img src="'+revistaPage+'" class="img-responsive center-block">');
                 $('#revistaPages').html('<img src="'+revistaPage+'">');
 
+
                 $('.previousPage').attr('id',link_app+'/page'+(parseInt(page_current)-1)+'.jpg');
                 $('.nextPage').attr('id',link_app+'/page'+(parseInt(page_current)+1)+'.jpg');
 
@@ -163,7 +168,8 @@
                         $('.nextPage').attr('id',dados[0]+'/page2.jpg');
 
                         //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="img-responsive center-block">');
-                        $('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg">');
+                        //$('#revistaPages').html('<img src="'+dados[0]+'/page1.jpg" class="zoom" data-magnify-src="'+dados[0]+'/page1.jpg" width="80">');
+                        $('#revistaPages').html('<img src="http://www.cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg" class="zoom" width="80" data-magnify-src="http://www.cenp.com.br/Site/cenp_revista/EDICAO_49/page1.jpg">');
                     }
                     
                   })
@@ -172,6 +178,8 @@
                   })
                   .always(function() {
                     //alert( "complete" );
+                    // Initiate magnification powers
+                  
                   });
         
         });
